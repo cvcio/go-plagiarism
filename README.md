@@ -92,21 +92,6 @@ detector, err := plagiarism.NewDetector(plagiarism.SetStopWords([]string{"ο", "
 ## Test Coverage
 ```go
 go test -v
-
-=== RUN   Test_NewDetector
---- PASS: Test_NewDetector (0.00s)
-=== RUN   Test_NewDetectorSetN
---- PASS: Test_NewDetectorSetN (0.00s)
-=== RUN   Test_NewDetectorSetNError
---- PASS: Test_NewDetectorSetNError (0.00s)
-=== RUN   Test_NewDetectorSetLang
---- PASS: Test_NewDetectorSetLang (0.00s)
-=== RUN   Test_NewDetectorSetLangError
---- PASS: Test_NewDetectorSetLangError (0.00s)
-=== RUN   Test_NewDetectorWithStrings
---- PASS: Test_NewDetectorWithStrings (0.09s)
-PASS
-ok  	github.com/cvcio/go-plagiarism	0.120
 ```
 ## Contributing
 
