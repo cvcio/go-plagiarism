@@ -8,18 +8,18 @@
 
 `go-plagiarism` is the main algorithm that utilizes [MediaWatch](https://mediawatch.io) and is inspired by [Efstathios Stamatatos](https://www3.icsd.aegean.gr/lecturers/stamatatos/) paper [Plagiarism detection using stopwords *n*-grams](http://dx.doi.org/10.1002/asi.21630).
 
-![Plagiarism Detection Algorithm - Function Words - Tokens](/assets/Plagiarism%20Detection%20Algorithm%20-%20Function%20Words%20-%20Tokens.png)
+![Plagiarism Detection Algorithm - Function Words - Tokens](https://github.com/cvcio/go-plagiarism/raw/main/assets/Plagiarism%20Detection%20Algorithm%20-%20Function%20Words%20-%20Tokens.png)
 <p align="center">filter stopwords</p>
 
-![N-Grams](/assets/N-Grams.png)
+![N-Grams](https://github.com/cvcio/go-plagiarism/raw/main/assets/N-Grams.png)
 <p align="center">loop through n-grams</p>
 
 We only rely on a small list of stopwords to calculate the plagiarism probability between two texts, in combination with *n*-gram loops that let us find, not only plagiarism but also paraphrase and patchwork plagiarism. In our case (cc [MediaWatch](https://mediawatch.io)) we use this algorithm to create relationships between similar articles and map the process, or **the chain of misinformation**. As our scope is to track propaganda networks in the news ecosystem, this algorithm only tested in such context.
 
-![The Chain of Misinformation](/assets/The%20Chain%20of%20Misinformation.png)
+![The Chain of Misinformation](https://github.com/cvcio/go-plagiarism/raw/main/assets/The%20Chain%20of%20Misinformation.png)
 <p align="center">The Chain of Misinformation</p>
 
-![Similarity Network](/assets/Similarity%20Network.png)
+![Similarity Network](https://github.com/cvcio/go-plagiarism/raw/main/assets/Similarity%20Network.png)
 <p align="center">Similarity Network</p>
 
 ## Usage
