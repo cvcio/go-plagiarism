@@ -3,7 +3,6 @@
 [![Build Status](https://github.com/cvcio/go-plagiarism/workflows/Go/badge.svg)](https://github.com/cvcio/go-plagiarism/actions)
 [![GoDoc](https://pkg.go.dev/badge/github.com/cvcio/go-plagiarism)](https://pkg.go.dev/github.com/cvcio/go-plagiarism)
 [![Go Report Card](https://goreportcard.com/badge/github.com/cvcio/go-plagiarism)](https://goreportcard.com/report/github.com/cvcio/go-plagiarism)
-[![codecov](https://codecov.io/gh/cvcio/go-plagiarism/branch/main/graph/badge.svg?token=UZYDK3SOBE)](https://codecov.io/gh/cvcio/go-plagiarism)
 
 # Plagiarism detection using stopwords *n*-grams
 
