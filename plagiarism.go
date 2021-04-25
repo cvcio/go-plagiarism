@@ -7,9 +7,9 @@ import (
 )
 
 const (
-	// default n-gram size
+	// N default n-gram size
 	N = 8
-	// default language
+	// LANG default language
 	LANG = "en"
 )
 
