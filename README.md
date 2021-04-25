@@ -90,7 +90,7 @@ detector, err := plagiarism.NewDetector(plagiarism.SetStopWords([]string{"ο", "
 ```
 
 ## Test Coverage
-```go
+```bash
 go test -v
 ```
 ## Contributing
