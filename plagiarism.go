@@ -21,8 +21,10 @@ type Set struct {
 
 // Detector struct
 type Detector struct {
-	N         int    // N-Gram size, will default to N
-	Lang      string // language, will default to Lang
+	// N-Gram size, will default to N
+	N int
+	// language, will default to Lang
+	Lang      string
 	StopWords []string
 
 	SourceText      string
@@ -88,7 +90,7 @@ func SetLang(lang string) Option {
 	}
 }
 
-// SetStopWords
+// SetStopWords will set a custom stopword list
 func SetStopWords(stopWords []string) Option {
 	return func(p *Detector) (err error) {
 		if len(stopWords) < 1 {
@@ -200,6 +202,8 @@ func (p *Detector) Equal(source, target []string) bool {
 	return true
 }
 
+// DetectWithStrings returns an error on failure, otherwise will set Score, Similar and Total
+// values to the detector interface.
 func (p *Detector) DetectWithStrings(source, target string) error {
 	// check if any of source or target text is an empty string and return an error
 	if source == "" || target == "" {
@@ -216,6 +220,9 @@ func (p *Detector) DetectWithStrings(source, target string) error {
 		p.GetStopWords(p.Tokenize(p.TargetText)),
 	)
 }
+
+// DetectWithStopWords returns an error on failure, otherwise will set Score, Similar and Total
+// values to the detector interface.
 func (p *Detector) DetectWithStopWords(source, target []string) error {
 	// check if any of source or target list is an empty string array and return an error
 	if len(source) < 1 || len(target) < 1 {
