@@ -34,7 +34,7 @@ In our case (cc [MediaWatch](https://mediawatch.io)) we use this algorithm to cr
 go get github.com/cvcio/go-plagiarism
 ```
 
-To use the detector you must provide either source/target texts, when using with `DetectWithStrings`, or a list of stopwords for each text, when usign with `DetectWithStopWords`. You can pass [options](#options) to the detector to set your [language](#supported-languages), *n*-gram size or a custom stopword list. After executing one of the available detection methods, the detector will write in its interface the final score (float64), the similar *n*-grams (int) and the total *n*-grams (int). Though it seems highily experimental you can see the algorithm in action, in real-time, to [app.mediawatch.io](https//app.mediawatch.io), where we continuosly monitor Greek news outlets. Read the complete documentation at [go-plagiarism](https://pkg.go.dev/github.com/cvcio/go-plagiarism).
+To use the detector you must provide either source/target texts, when using with `DetectWithStrings`, or a list of stopwords for each text, when usign with `DetectWithStopWords`. You can pass [options](#options) to the detector to set your [language](#supported-languages), *n*-gram size or a custom stopword list. After executing one of the available detection methods, the detector will write in its interface the final score (float64), the similar *n*-grams (int) and the total *n*-grams (int). Though it seems highily experimental you can see the algorithm in action, in real-time, at [app.mediawatch.io](https//app.mediawatch.io), where we continuosly monitor Greek news outlets. Read the complete documentation at [go-plagiarism](https://pkg.go.dev/github.com/cvcio/go-plagiarism).
 
 ```go
 package main
