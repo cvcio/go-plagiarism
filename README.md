@@ -124,6 +124,7 @@ You can find all supported languages in the [stopwords.go](/stopwords.go) file. 
 ### TODO List
 
 - [ ] Include additional test cases for each language
+- [ ] Include tests with various *n*-gram sizes
 - [ ] Introduce a `GetSimilar` method to retrieve similar passages
   
 
