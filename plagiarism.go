@@ -21,22 +21,18 @@ type Set struct {
 
 // Detector struct
 type Detector struct {
-	// N-Gram size, will default to N
-	N int
-	// language, will default to Lang
-	Lang      string
-	StopWords []string
-
+	N               int
+	Lang            string
+	StopWords       []string
 	SourceText      string
 	TargetText      string
 	SourceStopWords []string
 	TargetStopWords []string
 	SourceNGrams    [][]string
 	TargetNGrams    [][]string
-
-	Score   float64
-	Similar int
-	Total   int
+	Score           float64
+	Similar         int
+	Total           int
 }
 
 // NewDetector implements the detector interface. Will return a new detector or an error
@@ -55,7 +51,7 @@ func NewDetector(options ...Option) (*Detector, error) {
 	return detector, nil
 }
 
-// Option applies detector options and returns an error on failure
+// Option applies detector options and returns an error on failure.
 type Option func(*Detector) (err error)
 
 // SetN option sets the detector's n-gram size and must be a positive integer larger than 0,
@@ -68,7 +64,7 @@ func SetN(n int) Option {
 			return
 		}
 		// otherwise return an error
-		return fmt.Errorf("illegal n-gram size %d, consider using values within range 7-16", n)
+		return fmt.Errorf("illegal n-gram size %d, must be a positive integer larger than 0 (tip consider using values within range 7-16)", n)
 	}
 }
 
@@ -76,23 +72,24 @@ func SetN(n int) Option {
 // Use ISO 639-1 formatted language codes (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
 // Refer to stopwords.go for all supported languages. If the specified language doesn't exists or
 // has no stopwords (empty []string), will return an error. If you want to use a custom
-// language or a custom stopwords list use `plagiarism.SetStopWords([]string{})` option instead.
+// language or a custom stopwords list use SetStopWords option instead.
 func SetLang(lang string) Option {
 	return func(p *Detector) (err error) {
-		// check if language model exists and has stopwords
+		// check if language exists and has stopwords
 		if val, ok := StopWords[lang]; ok && val != nil {
 			p.Lang = lang
 			p.StopWords = val.([]string)
 			return
 		}
 		// otherwise return an error
-		return fmt.Errorf("stopwords for language `%s` not found or not supported yet, consider using a custom stopwords list with `plagiarism.SetStopWords([]string{})`", lang)
+		return fmt.Errorf("language %s not found or not supported yet (tip consider using a custom stopwords list with SetStopWords option", lang)
 	}
 }
 
-// SetStopWords will set a custom stopword list
+// SetStopWords option will set a custom language and stopword list.
 func SetStopWords(stopWords []string) Option {
 	return func(p *Detector) (err error) {
+		// check if stopwords list is not empty, otherwise return an error
 		if len(stopWords) < 1 {
 			return fmt.Errorf("stopwords list cannot be empty")
 		}
@@ -104,8 +101,7 @@ func SetStopWords(stopWords []string) Option {
 
 // Tokenize method will split the input string using bufio.Scanner into word tokens
 // in order to filter out the unnecessary words. You can always use your own
-// tokenizer and provide only the stopwords by using `plagiarism.SetStopWords([]string{})`
-// option instead.
+// tokenizer and provide only the stopwords by using the SetStopWords option instead.
 func (p *Detector) Tokenize(input string) []string {
 	var output []string
 	scanner := bufio.NewScanner(strings.NewReader(strings.ToLower(input)))
@@ -128,7 +124,7 @@ func (p *Detector) GetStopWords(input []string) []string {
 	return output
 }
 
-// IsStopWord will check if a given token is in the stopword list.
+// IsStopWord will check if a given token is in the stopwords list.
 func (p *Detector) IsStopWord(token string) bool {
 	for _, stopWord := range p.StopWords {
 		if stopWord == token {
@@ -138,7 +134,7 @@ func (p *Detector) IsStopWord(token string) bool {
 	return false
 }
 
-// GetNGrams returns the 2D array representation of the stopword list
+// GetNGrams returns the 2D array representation of the stopword list.
 func (p *Detector) GetNGrams(tokens []string) [][]string {
 	// implement ngram 2D list
 	grams := make([][]string, 0)
@@ -155,7 +151,7 @@ func (p *Detector) GetNGrams(tokens []string) [][]string {
 		grams = append(grams, tokens[i-offset:i+p.N-offset])
 	}
 
-	// return the ngram list
+	// return the n-gram list
 	return grams
 }
 
@@ -202,8 +198,8 @@ func (p *Detector) Equal(source, target []string) bool {
 	return true
 }
 
-// DetectWithStrings returns an error on failure, otherwise will set Score, Similar and Total
-// values to the detector interface.
+// DetectWithStrings returns an error on failure, otherwise will invoke
+// DetectWithStopWords method.
 func (p *Detector) DetectWithStrings(source, target string) error {
 	// check if any of source or target text is an empty string and return an error
 	if source == "" || target == "" {
@@ -224,7 +220,7 @@ func (p *Detector) DetectWithStrings(source, target string) error {
 // DetectWithStopWords returns an error on failure, otherwise will set Score, Similar and Total
 // values to the detector interface.
 func (p *Detector) DetectWithStopWords(source, target []string) error {
-	// check if any of source or target list is an empty string array and return an error
+	// check if any of source or target stopwords list is an empty string array and return an error
 	if len(source) < 1 || len(target) < 1 {
 		return fmt.Errorf("both, source and target list cannot be empty")
 	}
