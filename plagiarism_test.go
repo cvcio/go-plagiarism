@@ -81,23 +81,23 @@ func Test_NewDetectorSetLang(t *testing.T) {
 		lang     string
 		expected string
 	}{
-		{"bg", "bg"},
-		{"hr", "hr"},
-		{"nl", "nl"},
-		{"en", "en"},
-		{"fi", "fi"},
-		{"fr", "fr"},
-		{"de", "de"},
-		{"el", "el"},
-		{"hu", "hu"},
-		{"it", "it"},
-		{"no", "no"},
-		{"pl", "pl"},
-		{"pt", "pt"},
-		{"ro", "ro"},
-		{"ru", "ru"},
-		{"tr", "tr"},
-		{"uk", "uk"},
+		{"bg", "bg"}, // Bulgarian
+		{"hr", "hr"}, // Croatian
+		{"nl", "nl"}, // Dutch, Flemish
+		{"en", "en"}, // English
+		{"fi", "fi"}, // Finnish
+		{"fr", "fr"}, // French
+		{"de", "de"}, // German
+		{"el", "el"}, // Greek
+		{"hu", "hu"}, // Hungarian
+		{"it", "it"}, // Italian
+		{"no", "no"}, // Norwegian
+		{"pl", "pl"}, // Polish
+		{"pt", "pt"}, // Portuguese
+		{"ro", "ro"}, // Romanian
+		{"ru", "ru"}, // Russian
+		{"tr", "tr"}, // Turkish
+		{"uk", "uk"}, // Ukrainian
 	}
 
 	for _, test := range tests {
@@ -269,6 +269,22 @@ func Test_NewDetectorWithStringsMany(t *testing.T) {
 		{"el", "examples/testfiles/el/t3-source.txt", "examples/testfiles/el/t3-target.txt", 0.34255129348795715, 384, 1121},
 		{"el", "examples/testfiles/el/test-a.txt", "examples/testfiles/el/test-b.txt", 0.41025641025641024, 48, 117},
 		{"el", "examples/testfiles/el/small-a.txt", "examples/testfiles/el/small-b.txt", 0.0, 0, 2},
+		{"en", "examples/testfiles/en/t1-source.txt", "examples/testfiles/en/t1-target.txt", 0.2857142857142857, 152, 532},
+		{"ru", "examples/testfiles/ru/t1-source.txt", "examples/testfiles/ru/t1-target.txt", 0.24358974358974358, 38, 156},
+		{"bg", "examples/testfiles/bg/t1-source.txt", "examples/testfiles/bg/t1-target.txt", 0.8413793103448276, 122, 145},
+		{"hr", "examples/testfiles/hr/t1-source.txt", "examples/testfiles/hr/t1-target.txt", 0.05042016806722689, 6, 119},
+		{"nl", "examples/testfiles/nl/t1-source.txt", "examples/testfiles/nl/t1-target.txt", 0.13043478260869565, 18, 138},
+		{"fi", "examples/testfiles/fi/t1-source.txt", "examples/testfiles/fi/t1-target.txt", 0.8333333333333334, 110, 132},
+		{"fr", "examples/testfiles/fr/t1-source.txt", "examples/testfiles/fr/t1-target.txt", 0.2817551963048499, 122, 433},
+		{"de", "examples/testfiles/de/t1-source.txt", "examples/testfiles/de/t1-target.txt", 0.7740667976424361, 394, 509},
+		{"hu", "examples/testfiles/hu/t1-source.txt", "examples/testfiles/hu/t1-target.txt", 0.4563106796116505, 94, 206},
+		{"it", "examples/testfiles/it/t1-source.txt", "examples/testfiles/it/t1-target.txt", 0.8984126984126984, 566, 630},
+		{"no", "examples/testfiles/no/t1-source.txt", "examples/testfiles/no/t1-target.txt", 0.9666666666666667, 232, 240},
+		{"pl", "examples/testfiles/pl/t1-source.txt", "examples/testfiles/pl/t1-target.txt", 0.6808510638297872, 64, 94},
+		{"pt", "examples/testfiles/pt/t1-source.txt", "examples/testfiles/pt/t1-target.txt", 0.9938650306748467, 648, 652},
+		{"ro", "examples/testfiles/ro/t1-source.txt", "examples/testfiles/ro/t1-target.txt", 0.75, 150, 200},
+		{"tr", "examples/testfiles/tr/t1-source.txt", "examples/testfiles/tr/t1-target.txt", 0.967741935483871, 150, 155},
+		{"uk", "examples/testfiles/uk/t1-source.txt", "examples/testfiles/uk/t1-target.txt", 0.9915254237288136, 234, 236},
 	}
 
 	for _, test := range tests {
@@ -280,15 +296,15 @@ func Test_NewDetectorWithStringsMany(t *testing.T) {
 		detector.DetectWithStrings(source, target)
 
 		if detector.Score != test.Score {
-			t.Errorf("Error in DetectWithStrings, expected %f, got %f", test.Score, detector.Score)
+			t.Errorf("Error in DetectWithStrings Score, expected %f, got %f", test.Score, detector.Score)
 		}
 
 		if detector.Similar != test.Similar {
-			t.Errorf("Error in DetectWithStrings, expected %d, got %d", test.Similar, detector.Similar)
+			t.Errorf("Error in DetectWithStrings Similar, expected %d, got %d", test.Similar, detector.Similar)
 		}
 
 		if detector.Total != test.Total {
-			t.Errorf("Error in DetectWithStrings, expected %d, got %d", test.Total, detector.Total)
+			t.Errorf("Error in DetectWithStrings Total, expected %d, got %d", test.Total, detector.Total)
 		}
 	}
 }
