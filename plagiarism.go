@@ -222,7 +222,7 @@ func (p *Detector) DetectWithStrings(source, target string) error {
 func (p *Detector) DetectWithStopWords(source, target []string) error {
 	// check if any of source or target stopwords list is an empty string array and return an error
 	if len(source) < 1 || len(target) < 1 {
-		return fmt.Errorf("both, source and target list cannot be empty")
+		return fmt.Errorf("both, source and target stopwords list cannot be empty")
 	}
 
 	// assign detector values
