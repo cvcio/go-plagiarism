@@ -275,7 +275,7 @@ func Test_NewDetectorWithStringsMany(t *testing.T) {
 		{"hr", "examples/testfiles/hr/t1-source.txt", "examples/testfiles/hr/t1-target.txt", 0.05042016806722689, 6, 119},
 		{"nl", "examples/testfiles/nl/t1-source.txt", "examples/testfiles/nl/t1-target.txt", 0.13043478260869565, 18, 138},
 		{"fi", "examples/testfiles/fi/t1-source.txt", "examples/testfiles/fi/t1-target.txt", 0.8333333333333334, 110, 132},
-		{"fr", "examples/testfiles/fr/t1-source.txt", "examples/testfiles/fr/t1-target.txt", 0.2817551963048499, 122, 433},
+		{"fr", "examples/testfiles/fr/t1-source.txt", "examples/testfiles/fr/t1-target.txt", 0.2824074074074074, 122, 432},
 		{"de", "examples/testfiles/de/t1-source.txt", "examples/testfiles/de/t1-target.txt", 0.7740667976424361, 394, 509},
 		{"hu", "examples/testfiles/hu/t1-source.txt", "examples/testfiles/hu/t1-target.txt", 0.4563106796116505, 94, 206},
 		{"it", "examples/testfiles/it/t1-source.txt", "examples/testfiles/it/t1-target.txt", 0.8984126984126984, 566, 630},
@@ -294,6 +294,8 @@ func Test_NewDetectorWithStringsMany(t *testing.T) {
 		target, _ := readFile(test.target)
 
 		detector.DetectWithStrings(source, target)
+
+		// fmt.Println(detector.Score)
 
 		if detector.Score != test.Score {
 			t.Errorf("Error in DetectWithStrings Score, expected %f, got %f", test.Score, detector.Score)
