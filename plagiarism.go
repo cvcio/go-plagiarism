@@ -198,6 +198,28 @@ func (p *Detector) Equal(source, target []string) bool {
 	return true
 }
 
+// Detect will read values directly from the detector interface bypassing
+// GetStopWords and Tokenize methods assuming that you already provided a
+// a list of stopwords for each string (source, target). Will return an
+// error on failure.
+func (p *Detector) Detect() error {
+	// check if any of source or target stopwords list is an empty string array and return an error
+	if (len(p.SourceStopWords) < 1 || len(p.TargetStopWords) < 1) && (p.SourceText == "" || p.TargetText == "") {
+		return fmt.Errorf("you should at least define source and target texts")
+	}
+
+	if len(p.SourceStopWords) > 0 && len(p.TargetStopWords) > 0 {
+		return p.DetectWithStopWords(p.SourceStopWords, p.TargetStopWords)
+	}
+
+	// check if any of source or target text is an empty string and return an error
+	if p.SourceText != "" && p.TargetText != "" {
+		return p.DetectWithStrings(p.SourceText, p.TargetText)
+	}
+
+	return fmt.Errorf("empty strings cannot continue")
+}
+
 // DetectWithStrings returns an error on failure, otherwise will invoke
 // DetectWithStopWords method.
 func (p *Detector) DetectWithStrings(source, target string) error {
