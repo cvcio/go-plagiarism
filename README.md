@@ -8,7 +8,7 @@
 
 `go-plagiarism` is the main algorithm that utilizes [MediaWatch](https://mediawatch.io) and is inspired by [Efstathios Stamatatos](https://www3.icsd.aegean.gr/lecturers/stamatatos/) paper [Plagiarism detection using stopwords *n*-grams](http://dx.doi.org/10.1002/asi.21630).
 
-We only rely on a small list of stopwords, for each [language](#supported-languages), to calculate the plagiarism probability between two texts, in combination with *n*-grams that let us find, not only plagiarism but also paraphrase and patchwork plagiarism. Take a look at the images bellow to help you better understand the process.
+We only rely on a small list of stopwords, for each [language](#supported-languages), to calculate the plagiarism probability between two texts, in combination with *n*-grams that let us find, not only plagiarism but also paraphrase and patchwork plagiarism. Take a look at the images below to help you better understand the process.
 
 During the 1st step we tokenize the strings and keep only the stopwords (red tokens) for each document, as **SourceStopWords** and **TargetStopWords**.
 
@@ -18,7 +18,7 @@ Later we transform the stopwords for each document into *n*-grams, with default 
 
 ![N-Grams](https://github.com/cvcio/go-plagiarism/raw/main/assets/N-Grams.png)
 
-In our case (cc [MediaWatch](https://mediawatch.io)) we use this algorithm to create relationships between similar articles and map the process, or **the chain of misinformation**. As our scope is to track propaganda networks in the news ecosystem, this algorithm only tested in such context.
+In our case (cc [MediaWatch](https://mediawatch.io)) we use this algorithm to create relationships between similar articles and map the process, or **the chain of misinformation**. As our scope is to track propaganda networks in the news ecosystem, this algorithm is only tested in such context.
 
 ![The Chain of Misinformation](https://github.com/cvcio/go-plagiarism/raw/main/assets/The%20Chain%20of%20Misinformation.png)
 
@@ -34,7 +34,7 @@ In our case (cc [MediaWatch](https://mediawatch.io)) we use this algorithm to cr
 go get github.com/cvcio/go-plagiarism
 ```
 
-To use the detector you must provide either source/target texts, when using with `DetectWithStrings`, or a list of stopwords for each text, when usign with `DetectWithStopWords`. You can pass [options](#options) to the detector to set your [language](#supported-languages), *n*-gram size or a custom stopword list. After executing one of the available detection methods, the detector will write in its interface the final score (float64), the similar *n*-grams (int) and the total *n*-grams (int). Though it seems highily experimental you can see the algorithm in action, in real-time, at [app.mediawatch.io](https//app.mediawatch.io), where we continuosly monitor Greek news outlets. Read the complete documentation at [go-plagiarism](https://pkg.go.dev/github.com/cvcio/go-plagiarism).
+To use the detector you must provide either source/target texts when using with `DetectWithStrings`, or a list of stopwords for each text, when using with `DetectWithStopWords`. You can pass [options](#options) to the detector to set your [language](#supported-languages), *n*-gram size or a custom stopword list. After executing one of the available detection methods, the detector will write in its interface the final score (float64), the similar *n*-grams (int) and the total *n*-grams (int). Though it seems highly experimental you can see the algorithm in action, in real-time, at [app.mediawatch.io](https://app.mediawatch.io), where we continuously monitor Greek news outlets. Read the complete documentation at [go-plagiarism](https://pkg.go.dev/github.com/cvcio/go-plagiarism).
 
 ```go
 package main
@@ -80,7 +80,7 @@ func main() {
 
 ## Options
 
-Detector can be initialized with options, `SetN` to set the *n*-gram size, `SetLang` to set the detector's language model and assign the approrpiate stopwords and `SetStopWords` to assign a custom list of stopwords. Do not use `SetLang` alongside with `SetStopWords` as it will override one another.
+Detector can be initialized with options, `SetN` to set the *n*-gram size, `SetLang` to set the detector's language model and assign the appropriate stopwords and `SetStopWords` to assign a custom list of stopwords. Do not use `SetLang` alongside with `SetStopWords` as it will override one another.
 ```go
 plagiarism.SetN(n int) Option // will set the desired n-gram size
 plagiarism.SetLang(lang string) Option // will set the detector's language and assign the default stopwords
